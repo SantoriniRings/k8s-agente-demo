@@ -2,6 +2,9 @@
 # Cada exclusión de abajo es deuda técnica con un issue asociado.
 # Regla: los cambios a este archivo sólo pueden QUITAR exclusiones o AGREGAR checks.
 checks:
+  include:
+    - no-readiness-probe
+    - no-liveness-probe
   exclude:
     # Fuera del alcance de la demo: la anti-afinidad depende del cluster real.
     - no-anti-affinity
