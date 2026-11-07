@@ -3,9 +3,6 @@
 # Regla: los cambios a este archivo sólo pueden QUITAR exclusiones o AGREGAR checks.
 checks:
   exclude:
-    # Issue: "Definir requests y limits de CPU y memoria"
-    - unset-cpu-requirements
-    - unset-memory-requirements
     # Issue: "Correr el contenedor como no-root con filesystem de solo lectura"
     - run-as-non-root
     - no-read-only-root-fs
