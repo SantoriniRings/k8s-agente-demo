@@ -5,6 +5,8 @@ metadata:
   namespace: demo
   labels:
     app: podinfo
+    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/part-of: demo
 spec:
   type: ClusterIP
   selector:
