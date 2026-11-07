@@ -2,6 +2,9 @@
 # Cada exclusión de abajo es deuda técnica con un issue asociado.
 # Regla: los cambios a este archivo sólo pueden QUITAR exclusiones o AGREGAR checks.
 checks:
+  include:
+    - no-readiness-probe
+    - no-liveness-probe
   exclude:
     # Issue: "Correr el contenedor como no-root con filesystem de solo lectura"
     - run-as-non-root
