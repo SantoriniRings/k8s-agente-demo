@@ -5,6 +5,8 @@ metadata:
   namespace: demo
   labels:
     app: podinfo
+    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/part-of: demo
 spec:
   replicas: 2
   selector:
@@ -14,6 +16,8 @@ spec:
     metadata:
       labels:
         app: podinfo
+        app.kubernetes.io/name: podinfo
+        app.kubernetes.io/part-of: demo
     spec:
       containers:
         - name: podinfo

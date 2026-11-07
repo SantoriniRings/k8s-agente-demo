@@ -5,3 +5,13 @@ checks:
   exclude:
     # Fuera del alcance de la demo: la anti-afinidad depende del cluster real.
     - no-anti-affinity
+customChecks:
+  - name: required-label-app-kubernetes-io-name
+    description: Los Deployments deben tener la label app.kubernetes.io/name.
+    remediation: Agregar app.kubernetes.io/name en metadata.labels del Deployment.
+    template: required-label
+    params:
+      key: app.kubernetes.io/name
+    scope:
+      objectKinds:
+        - DeploymentLike
