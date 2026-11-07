@@ -93,3 +93,4 @@ La tarea corre sola a las 03:00 y abre el PR del issue #2.
 - kube-linter: https://github.com/stackrox/kube-linter
 - El autor no puede aprobar su propio PR: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/approving-a-pull-request-with-required-reviews
 - Las reglas de protección no aplican a admins por defecto: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
+
