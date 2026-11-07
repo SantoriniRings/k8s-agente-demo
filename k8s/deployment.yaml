@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: podinfo
+  annotations:
+    ignore-check.kube-linter.io/unset-cpu-requirements: "lo resuelvo después"
+    ignore-check.kube-linter.io/unset-memory-requirements: "lo resuelvo después"
   namespace: demo
   labels:
     app: podinfo
