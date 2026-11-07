@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  KUBECONFORM_VERSION: v0.8.0
+  KUBE_LINTER_VERSION: v0.8.3
+  KUBERNETES_VERSION: 1.30.0
+
+jobs:
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar kubeconform y kube-linter
+        run: |
+          curl -sSL "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" | tar xz kubeconform
+          curl -sSL "https://github.com/stackrox/kube-linter/releases/download/${KUBE_LINTER_VERSION}/kube-linter-linux.tar.gz" | tar xz kube-linter
+          sudo mv kubeconform kube-linter /usr/local/bin/
+
+      - name: Validar contra el esquema de Kubernetes
+        run: kubeconform -strict -summary -kubernetes-version "${KUBERNETES_VERSION}" k8s/
+
+      - name: Buenas prácticas (kube-linter)
+        run: kube-linter lint k8s/ --config .kube-linter.yaml
+
+  guard:
+    name: guard
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar PyYAML
+        run: pip install pyyaml==6.0.2
+
+      # Se ejecuta el guard.sh de la rama base: si el PR lo modifica, no puede validarse a sí mismo.
+      - name: Barreras para ramas del agente
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git show "origin/${BASE_REF}:scripts/guard.sh" > "$RUNNER_TEMP/guard.sh"
+          bash "$RUNNER_TEMP/guard.sh" "$HEAD_REF" "$BASE_REF"

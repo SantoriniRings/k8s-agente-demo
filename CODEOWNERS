@@ -1,0 +1,6 @@
+# Los archivos que definen las barreras requieren revisión de una persona del equipo.
+# Reemplazar [usuario-github] por quien revisa (no puede ser la misma cuenta que usa el agente).
+/.github/         @craftech-squad5
+/CODEOWNERS       @craftech-squad5
+/scripts/guard.sh @craftech-squad5
+/.kube-linter.yaml @craftech-squad5

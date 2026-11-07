@@ -1,0 +1,13 @@
+# Configuración de kube-linter para la demo.
+# Cada exclusión de abajo es deuda técnica con un issue asociado.
+# Regla: los cambios a este archivo sólo pueden QUITAR exclusiones o AGREGAR checks.
+checks:
+  exclude:
+    # Issue: "Definir requests y limits de CPU y memoria"
+    - unset-cpu-requirements
+    - unset-memory-requirements
+    # Issue: "Correr el contenedor como no-root con filesystem de solo lectura"
+    - run-as-non-root
+    - no-read-only-root-fs
+    # Fuera del alcance de la demo: la anti-afinidad depende del cluster real.
+    - no-anti-affinity
